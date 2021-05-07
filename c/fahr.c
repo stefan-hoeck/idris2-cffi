@@ -1,41 +1,37 @@
 #include <stdio.h>
 
+#define LOWER  0
+#define UPPER  300
+#define STEP   20
+#define ADD    32.0
+#define FACTOR (5.0 / 9.0)
+
 float toCelsius (float fahr)
 {
-  return  (5.0 / 9.0) * (fahr - 32.0);
+  return  (fahr - ADD) * FACTOR;
 }
 
 float toFahr (float celsius)
 {
-  return  (9.0 / 5.0) * celsius + 32.0;
+  return  celsius / FACTOR + ADD;
 }
 
 void printFahr ()
 {
   float fahr, celsius;
-  float lower, upper, step;
-  lower = 0;
-  upper = 300;
-  step  = 20;
-  fahr = lower;
-  while (fahr <= upper) {
+  fahr = LOWER;
+  while (fahr <= UPPER) {
     celsius = toCelsius (fahr);
     printf("%3.0f\t%6.1f\n", fahr, celsius);
-    fahr += step;
+    fahr += STEP;
   }
 }
 
 void printCelsius ()
 {
   float fahr, celsius;
-  float lower, upper, step;
-  lower = -20;
-  upper = 200;
-  step  = 20;
-  celsius = lower;
-  while (celsius <= upper) {
+  for (celsius = LOWER; celsius <= UPPER; celsius += STEP) {
     fahr = toFahr (celsius);
     printf("%3.0f\t%6.1f\n", celsius, fahr);
-    celsius += step;
   }
 }
